@@ -7,6 +7,7 @@ import StockList from '../components/StockList';
 import StockChart from '../components/StockChart';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import MarketIndexCard from '../components/MarketIndexCard';
 import axios from 'axios';
 
 type HomeScreenProps = NativeStackScreenProps<any, any>;
@@ -113,6 +114,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           </TouchableOpacity>
         </View>
 
+        {/*Market Index*/}
+        <MarketIndexCard />
+        
         {/* ASPI Live Chart */}
         <View style={styles.chartSection}>
           <View style={styles.sectionHeader}>
