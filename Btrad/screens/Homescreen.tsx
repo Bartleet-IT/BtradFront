@@ -33,6 +33,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       formData.append("chartId", "1");
       formData.append("period", "1");
   
+
       // Send POST request
       const response = await axios.post<ChartDataPoint[]>(
         "https://www.cse.lk/api/chartData",
@@ -66,7 +67,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
   useEffect(() => {
     fetchASPI();
-    const interval = setInterval(fetchASPI, 30000); // Update every 30 seconds
+    const interval = setInterval(fetchASPI, 120000); // Update every 120 seconds
     return () => clearInterval(interval);
   }, []);
   
