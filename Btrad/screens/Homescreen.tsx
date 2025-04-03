@@ -27,45 +27,49 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
   const fetchASPI = async () => {
     try {
       setLoading(true);
-      // Try with POST request first (some APIs require POST for chart data)
-      const response = await axios.post<ChartDataPoint[]>('https://www.cse.lk/api/chartData', null, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+  
+      // Prepare form data
+      const formData = new URLSearchParams();
+      formData.append("chartId", "1");
+      formData.append("period", "1");
+  
+      // Send POST request
+      const response = await axios.post<ChartDataPoint[]>(
+        "https://www.cse.lk/api/chartData",
+        formData.toString(),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Accept": "application/json",
+          },
         }
-      });
-      
-      // Fallback to GET if POST fails
-      if (!response.data) {
-        const getResponse = await axios.get<ChartDataPoint[]>('https://www.cse.lk/api/chartData');
-        response.data = getResponse.data;
-      }
-
+      );
+  
       const apiData = response.data;
-      
+  
       if (apiData && apiData.length > 0) {
-        const values = apiData.map(item => item.v);
+        const values = apiData.map((item) => item.v);
         setAspiData(values);
         setCurrentValue(values[values.length - 1]);
         setError(null);
       }
     } catch (err) {
-      console.error('Error fetching ASPI data:', err);
-      setError('Failed to load market data. Showing sample data.');
-      // Fallback to mock data if API fails
+      console.error("Error fetching ASPI data:", err);
+      setError("Failed to load market data. Showing sample data.");
       setAspiData([8500, 8550, 8530, 8600, 8650, 8620, 8700, 8750, 8720, 8800]);
       setCurrentValue(8800);
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchASPI();
-    // Refresh data every 30 seconds
-    const interval = setInterval(fetchASPI, 60000);
+    const interval = setInterval(fetchASPI, 30000); // Update every 30 seconds
     return () => clearInterval(interval);
   }, []);
+  
 
   // Calculate daily change
   const calculateChange = () => {
