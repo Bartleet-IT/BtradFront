@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import StockChart from '../components/StockChart';
 import { RouteProp } from '@react-navigation/native';
-import { Stock } from '../constants/stocks'; // Import your Stock interface
+import { Stock } from '../constants/stocks'; // Import Stock interface
 
 // Define the route prop type
 type StockDetailScreenRouteProp = RouteProp<{

@@ -101,7 +101,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
         {/* Welcome Card */}
         <View style={styles.welcomeCard}>
-          <Text style={styles.welcomeTitle}>Welcome back, Eshantha!</Text>
+          <Text style={styles.welcomeTitle}>Welcome back, Sujeewa!</Text>
           <Text style={styles.welcomeText}>
             Let's start trading
           </Text>

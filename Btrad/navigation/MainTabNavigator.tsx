@@ -37,6 +37,7 @@ export default function MainTabNavigator() {
           backgroundColor: '#000',
           borderTopColor: '#1C1C1C',
           paddingTop: 8,
+          
         },
         headerShown: false,
       })}
