@@ -1,87 +1,58 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { stocks } from '../constants/stocks';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import StockCard from './StockCard';
+import { fetchStockData, Stock } from '../services/stockService';
 
-export default function StockList({ navigation }) {
+const StockList = ({ navigation }: { navigation: any }) => {
+  const [stocks, setStocks] = useState<Stock[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await fetchStockData();
+        setStocks(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#00FF9D" />
+      </View>
+    );
+  }
+
   return (
-    <View>
+    <View style={styles.container}>
       {stocks.map((stock, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.stockItem}
+        <StockCard
+          key={stock.id} // Using stock.id instead of index for better key
+          stock={stock}
           onPress={() => navigation.navigate('StockDetail', { stock })}
-        >
-          <View style={styles.stockLeft}>
-            <MaterialCommunityIcons 
-              name="chart-line" 
-              size={24} 
-              color="#00FF9D" 
-              style={styles.stockIcon}
-            />
-            <View>
-              <Text style={styles.stockSymbol}>{stock.symbol}</Text>
-              <Text style={styles.stockName}>{stock.name}</Text>
-            </View>
-          </View>
-          
-          <View style={styles.stockRight}>
-            <Text style={styles.stockPrice}>${stock.price.toFixed(2)}</Text>
-            <Text style={[
-              styles.stockChange,
-              stock.change >= 0 ? styles.positive : styles.negative
-            ]}>
-              {stock.change >= 0 ? '+' : ''}
-              {stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
-            </Text>
-          </View>
-        </TouchableOpacity>
+        />
       ))}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  stockItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  container: {
+    paddingHorizontal: 16,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#1C1C1C',
-  },
-  stockLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  stockIcon: {
-    marginRight: 12,
-  },
-  stockSymbol: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  stockName: {
-    color: '#9B9B9B',
-    fontSize: 14,
-  },
-  stockRight: {
-    alignItems: 'flex-end',
-  },
-  stockPrice: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  stockChange: {
-    fontSize: 14,
-  },
-  positive: {
-    color: '#00FF9D',
-  },
-  negative: {
-    color: '#FF3B30',
+    padding: 20,
   },
 });
+
+export default StockList;

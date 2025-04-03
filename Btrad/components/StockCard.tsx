@@ -1,32 +1,28 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Stock } from '../services/stockService';
 
-const StockCard = ({ stock, onPress }: { stock: any, onPress: () => void }) => {
+interface StockCardProps {
+  stock: Stock;
+  onPress: () => void;
+}
+
+const StockCard = ({ stock, onPress }: StockCardProps) => {
+  const isPositive = stock.change >= 0;
+
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
-      <View style={styles.leftContainer}>
-        <MaterialCommunityIcons 
-          name="chart-line" 
-          size={24} 
-          color="#00FF9D" 
-          style={styles.icon}
-        />
+    <TouchableOpacity onPress={onPress} style={styles.card}>
+      <View style={styles.row}>
         <View>
           <Text style={styles.symbol}>{stock.symbol}</Text>
-          <Text style={styles.name}>{stock.name}</Text>
+          <Text style={styles.name}>{stock.lastTradedPrice.toFixed(2)} LKR</Text>
         </View>
-      </View>
-      
-      <View style={styles.rightContainer}>
-        <Text style={styles.price}>${stock.price.toFixed(2)}</Text>
-        <Text style={[
-          styles.change,
-          stock.change >= 0 ? styles.positive : styles.negative
-        ]}>
-          {stock.change >= 0 ? '+' : ''}
-          {stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
-        </Text>
+        <View style={styles.rightAligned}>
+          <Text style={[styles.change, isPositive ? styles.positive : styles.negative]}>
+            {isPositive ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercentage.toFixed(2)}%)
+          </Text>
+          <Text style={styles.volume}>Vol: {stock.quantity.toLocaleString()}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -34,20 +30,15 @@ const StockCard = ({ stock, onPress }: { stock: any, onPress: () => void }) => {
 
 const styles = StyleSheet.create({
   card: {
+    backgroundColor: '#1C1C1C',
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#1C1C1C',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-  },
-  leftContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  icon: {
-    marginRight: 12,
   },
   symbol: {
     color: '#FFFFFF',
@@ -59,23 +50,23 @@ const styles = StyleSheet.create({
     color: '#9B9B9B',
     fontSize: 14,
   },
-  rightContainer: {
+  rightAligned: {
     alignItems: 'flex-end',
-  },
-  price: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 4,
   },
   change: {
     fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 4,
   },
   positive: {
     color: '#00FF9D',
   },
   negative: {
     color: '#FF3B30',
+  },
+  volume: {
+    color: '#9B9B9B',
+    fontSize: 12,
   },
 });
 

@@ -151,9 +151,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
         {/* Today's Movers */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Today's Movers</Text>
-          <StockList navigation={navigation} />
-        </View>
+  <Text style={styles.sectionTitle}>Today's Movers</Text>
+  <StockList navigation={navigation} />
+</View>
         
         {/* Market News */}
         <View style={styles.section}>
