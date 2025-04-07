@@ -14,7 +14,7 @@ export default function RootNavigator() {
       }}
     >
       <Stack.Screen name="MainTabs" component={MainTabNavigator} />
-      <Stack.Screen 
+      {/* <Stack.Screen 
         name="StockDetail" 
         component={StockDetailScreen} 
         options={{
@@ -24,7 +24,7 @@ export default function RootNavigator() {
           headerTintColor: '#fff',
           headerBackVisible: false,
         }}
-      />
+      /> */}
     </Stack.Navigator>
-  );
+  ); 
 }

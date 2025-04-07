@@ -96,7 +96,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         <View style={styles.appHeader}>
           <Text style={styles.appTitle}>Btrad</Text>
           <TouchableOpacity>
-            <MaterialCommunityIcons name="bell-outline" size={24} color="#00FF9D" />
+            <MaterialCommunityIcons name="bell-outline" size={24} color="#FFF" />
           </TouchableOpacity>
         </View>
 
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     paddingTop: 32,
   },
   appTitle: {
-    color: '#00FF9D',
+    color: '#FFD700',
     fontSize: 28,
     fontWeight: 'bold',
     fontStyle: 'italic',
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   viewPortfolioButton: {
-    backgroundColor: '#00FF9D',
+    backgroundColor: '#FFD700',
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: 'center',
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   liveBadge: {
-    color: '#00FF9D',
+    color: '#00bac9',
     fontSize: 12,
     marginLeft: 4,
   },
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#00FF9D',
+    backgroundColor: '#00bac9',
   },
   aspiInfo: {
     flexDirection: 'row',

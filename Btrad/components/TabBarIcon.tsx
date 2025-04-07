@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { MaterialCommunityIcons, Feather, FontAwesome } from '@expo/vector-icons';
 
 export default function TabBarIcon({ route, focused }: { route: { name: string }; focused: boolean }) {
-  const iconColor = focused ? '#00FF9D' : '#9B9B9B';
+  const iconColor = focused ? '#17a2b8' : '#9B9B9B';
   const iconSize = 24;
 
   switch (route.name) {

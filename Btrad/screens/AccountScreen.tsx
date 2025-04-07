@@ -88,7 +88,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({ title, options, handl
     {options.map(({ icon, title, screen, rightText }, index) => (
       <TouchableOpacity key={index} style={styles.settingItem} onPress={() => handleNavigation(screen)}>
         <View style={styles.settingLeft}>
-          <MaterialCommunityIcons name={icon} size={24} color="#00FF9D" />
+          <MaterialCommunityIcons name={icon} size={24} color="#FFD700" />
           <Text style={styles.settingText}>{title}</Text>
         </View>
         <View style={styles.settingRight}>
@@ -106,12 +106,12 @@ const styles = StyleSheet.create({
   backButton: { padding: 4 },
   headerTitle: { color: '#fff', fontSize: 24, fontWeight: 'bold' },
   profileContainer: { alignItems: 'center', marginVertical: 24, paddingHorizontal: 16 },
-  profileIcon: { width: 100, height: 100, borderRadius: 50, backgroundColor: '#00FF9D', justifyContent: 'center', alignItems: 'center', marginBottom: 16 },
+  profileIcon: { width: 100, height: 100, borderRadius: 50, backgroundColor: '#FFD700', justifyContent: 'center', alignItems: 'center', marginBottom: 16 },
   profileInitial: { color: '#000', fontSize: 42, fontWeight: 'bold' },
   profileName: { color: '#fff', fontSize: 24, fontWeight: 'bold', marginBottom: 4 },
   profileEmail: { color: '#9B9B9B', fontSize: 16, marginBottom: 16 },
-  editProfileButton: { borderWidth: 1, borderColor: '#00FF9D', borderRadius: 20, paddingVertical: 8, paddingHorizontal: 24 },
-  editProfileText: { color: '#00FF9D', fontSize: 14, fontWeight: '500' },
+  editProfileButton: { borderWidth: 1, borderColor: '#FFD700', borderRadius: 20, paddingVertical: 8, paddingHorizontal: 24 },
+  editProfileText: { color: '#FFD700', fontSize: 14, fontWeight: '500' },
   section: { marginBottom: 24, backgroundColor: '#1C1C1C', borderRadius: 12, marginHorizontal: 16, paddingVertical: 8 },
   sectionTitle: { color: '#9B9B9B', fontSize: 14, fontWeight: '500', marginLeft: 16, marginBottom: 8, marginTop: 12 },
   settingItem: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 16, paddingHorizontal: 16, borderBottomWidth: 1, borderBottomColor: '#2A2A2A' },

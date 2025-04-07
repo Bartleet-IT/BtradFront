@@ -33,7 +33,7 @@ const PortfolioScreen = () => {
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Your Investments</Text>
           <TouchableOpacity style={styles.settingsButton}>
-            <Feather name="settings" size={24} color="#00FF9D" />
+            <Feather name="settings" size={24} color="#fff" />
           </TouchableOpacity>
         </View>
         
